@@ -1,5 +1,11 @@
  # LuxStay Properties Rental Management System
 
+### Members
+
+- Paras, Christian Hans Israel E. | ***WazeyBoi***
+- Dotarot, Marc Andre C. | ***BlackLazuli***
+- Llaban, Feerdee Anne C. | ***KDazai***
+
 ## Project Overview
 
 The **LuxStay Properties Rental Management System** is designed to streamline and automate the management of rental properties under the LuxStay brand. The system aims to enhance operational efficiency by centralizing property listings, reservations, tenant management, and financial transactions. By integrating various functionalities into a single platform, LuxStay seeks to improve the experience for property managers, tenants, and other stakeholders, ensuring a smooth and efficient rental process.
