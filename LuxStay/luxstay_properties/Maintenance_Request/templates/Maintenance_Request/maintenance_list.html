@@ -1,0 +1,7 @@
+<h2>Maintenance Requests</h2>
+<a href="{% url 'maintenance_create' %}">Create New Request</a>
+<ul>
+    {% for request in requests %}
+    <li>{{ request.description }} - <a href="{% url 'maintenance_update' request.pk %}">Edit</a> - <a href="{% url 'maintenance_delete' request.pk %}">Delete</a></li>
+    {% endfor %}
+</ul>

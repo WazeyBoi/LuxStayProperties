@@ -1,0 +1,7 @@
+<h2>Feedback</h2>
+<a href="{% url 'feedback_create' %}">Submit New Feedback</a>
+<ul>
+    {% for feedback in feedbacks %}
+    <li>{{ feedback.comments }} - <a href="{% url 'feedback_update' feedback.pk %}">Edit</a> - <a href="{% url 'feedback_delete' feedback.pk %}">Delete</a></li>
+    {% endfor %}
+</ul>
