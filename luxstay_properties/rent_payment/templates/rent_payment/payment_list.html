@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        .header, .footer {
+            background-color: #71131d;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .header img {
+            height: 40px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #71131d;
+            text-align: center;
+        }
+        .payment-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .payment-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .payment-list li:last-child {
+            border-bottom: none;
+        }
+        a {
+            color: #71131d;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #5b0f17;
+            text-decoration: underline;
+        }
+        .add-payment {
+            display: block;
+            text-align: right;
+            margin-bottom: 20px;
+            color: #71131d;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .add-payment:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="{% static 'logo.png' %}" alt="LuxStay Properties">
+        <p>LuxStay Properties</p>
+    </div>
+
+    <div class="container">
+        <h1>Payments</h1>
+        <a href="{% url 'payment_create' %}" class="add-payment">Add Payment</a>
+        <ul class="payment-list">
+            {% for payment in payments %}
+                <li>
+                    {{ payment }} -
+                    <a href="{% url 'payment_update' payment.paymentId %}">Edit</a>
+                    <a href="{% url 'payment_delete' payment.paymentId %}">Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>LuxStay Properties</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lease Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        .header, .footer {
+            background-color: #71131d;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .header img {
+            height: 40px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #71131d;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .add-link {
+            display: block;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #71131d;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .add-link:hover {
+            text-decoration: underline;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background-color: #f1f1f1;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        li span {
+            flex-grow: 1;
+        }
+        a {
+            color: #71131d;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="{% static 'logo.png' %}" alt="LuxStay Properties">
+        <p>LuxStay Properties</p>
+    </div>
+
+    <div class="container">
+        <h1>Leases</h1>
+        <a href="{% url 'lease_create' %}" class="add-link">Add Lease</a>
+        <ul>
+            {% for lease in leases %}
+                <li>
+                    <span>Lease ID: {{ lease.leaseId }} - 
+                    Property ID: {{ lease.propertyId }} - 
+                    Tenant ID: {{ lease.tenantId }} - 
+                    Start Date: {{ lease.startDate }} - 
+                    End Date: {{ lease.endDate }} - 
+                    Total Amount: {{ lease.totalAmount }}</span>
+                    <a href="{% url 'lease_update' lease.leaseId %}">Edit</a>
+                    <a href="{% url 'lease_delete' lease.leaseId %}">Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>LuxStay Properties</p>
+    </div>
+</body>
+</html>
