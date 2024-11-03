@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f6f9; color: #333; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0;">
+
+    <div style="background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); width: 340px; margin: 20px;">
+        <h2 style="text-align: center; color: #800000; margin-bottom: 20px; font-size: 24px; font-weight: bold;">Register</h2>
+        
+        <form method="post" style="display: flex; flex-direction: column; gap: 10px;">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            
+            <label for="username" style="font-weight: normal; color: #333; font-size: 14px;">Username:</label>
+            {{ form.username }}
+            
+            <label for="password1" style="font-weight: normal; color: #333; font-size: 14px;">Password:</label>
+            {{ form.password1 }}
+            
+            <label for="password2" style="font-weight: normal; color: #333; font-size: 14px;">Password confirmation:</label>
+            {{ form.password2 }}
+            
+            <label for="first_name" style="font-weight: normal; color: #333; font-size: 14px;">First name:</label>
+            {{ form.first_name }}
+            
+            <label for="last_name" style="font-weight: normal; color: #333; font-size: 14px;">Last name:</label>
+            {{ form.last_name }}
+            
+            <label for="email" style="font-weight: normal; color: #333; font-size: 14px;">Email address:</label>
+            {{ form.email }}
+
+            <label for="contact" style="font-weight: normal; color: #333; font-size: 14px;">Contact:</label>
+            {{ form.contact }}
+            
+            <label for="birthdate" style="font-weight: normal; color: #333; font-size: 14px;">Birthdate:</label>
+            {{ form.birthdate }}
+            
+            <label for="streetAddress" style="font-weight: normal; color: #333; font-size: 14px;">Street Address:</label>
+            {{ form.streetAddress }}
+            
+            <label for="city" style="font-weight: normal; color: #333; font-size: 14px;">City:</label>
+            {{ form.city }}
+            
+            <label for="zipcode" style="font-weight: normal; color: #333; font-size: 14px;">Zipcode:</label>
+            {{ form.zipcode }}
+            
+            <button type="submit" style="padding: 10px; background-color: #800000; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; width: 100%; margin-top: 15px;">Register</button>
+        </form>
+
+        <p style="text-align: center; margin-top: 15px; color: #555; font-size: 14px;">
+            Already have an account? <a href="{% url 'login' %}" style="color: #800000; text-decoration: none; font-weight: bold;">Login here</a>
+        </p>
+    </div>
+
+</body>
+</html>

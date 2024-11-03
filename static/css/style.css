@@ -1,0 +1,60 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Dashboard container styling */
+.dashboard-container {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+/* Heading style */
+.dashboard-container h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Link container */
+.links-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Link styling */
+.dashboard-link {
+    display: inline-block;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #4CAF50;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.dashboard-link:hover {
+    background-color: #45a049;
+}
+
+/* Media Query for Smaller Screens */
+@media (max-width: 600px) {
+    .dashboard-container {
+        width: 90%;
+        padding: 20px;
+    }
+}

@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f6f9; color: #333; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+
+    <div style="text-align: center; background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); width: 400px;">
+        <!-- Logout link at the top -->
+        <div style="text-align: right; margin-bottom: 10px;">
+            <a href="{% url 'logout' %}" style="color: #800000; font-weight: bold; text-decoration: none; font-size: 14px;">Logout</a>
+        </div>
+
+        <h1 style="font-size: 24px; color: #800000; margin-bottom: 20px;">Welcome, {{ request.user.username }}</h1>
+
+        <!-- Management links styled to match the maroon theme -->
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+            <a href="{% url 'tenant_management' %}" style="text-decoration: none; color: #ffffff; background-color: #800000; padding: 10px 20px; border-radius: 5px; font-weight: bold; transition: background-color 0.3s ease;">Tenant Management</a>
+            <a href="{% url 'property_listing_management' %}" style="text-decoration: none; color: #ffffff; background-color: #800000; padding: 10px 20px; border-radius: 5px; font-weight: bold; transition: background-color 0.3s ease;">Property Listing Management</a>
+        </div>
+    </div>
+
+</body>
+</html>

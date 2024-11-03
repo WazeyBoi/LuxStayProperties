@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Property</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f6f9; display: flex; justify-content: center; padding: 20px;">
+
+    <div style="background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); width: 400px;">
+        <h2 style="text-align: center; color: #800000;">Book Property</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label for="start_date">Start Date:</label>
+            <input type="date" name="start_date" required>
+            
+            <label for="end_date">End Date:</label>
+            <input type="date" name="end_date" required>
+            
+            <button type="submit" style="margin-top: 10px;">Book Property</button>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f6f9; display: flex; justify-content: center; padding: 20px;">
+
+    <div style="background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); width: 600px;">
+        <h2 style="text-align: center; color: #800000;">My Bookings</h2>
+
+        <!-- Active Bookings -->
+        <h3>Active Bookings</h3>
+        <ul>
+            {% for booking in active_bookings %}
+                <li>{{ booking.property.address }} | Start: {{ booking.start_date }} | End: {{ booking.end_date }}</li>
+            {% empty %}
+                <p>No active bookings.</p>
+            {% endfor %}
+        </ul>
+
+        <!-- Old Bookings -->
+        <h3>Old Bookings</h3>
+        <ul>
+            {% for booking in old_bookings %}
+                <li>{{ booking.property.address }} | Start: {{ booking.start_date }} | End: {{ booking.end_date }}</li>
+            {% empty %}
+                <p>No old bookings.</p>
+            {% endfor %}
+        </ul>
+    </div>
+
+</body>
+</html>
