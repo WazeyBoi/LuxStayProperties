@@ -27,7 +27,6 @@ The **LuxStay Properties Rental Management System** is designed to streamline an
 | **Rent Payment Processing**     | Facilitate the collection and tracking of rent payments from tenants.       |
 | **Maintenance Request Management** | Enable tenants to submit and track maintenance requests for their rental properties. |
 | **User Role and Access Management** | Manage different levels of access for users based on their roles within the system. |
-| **Document Management**         | Store and manage all relevant documents related to properties, leases, and tenants. |
 | **Feedback and Improvement Tracking** | Gather and manage feedback from tenants and property managers to continuously improve the system. |
 
 ##  Figma UI/UX Design Link 
