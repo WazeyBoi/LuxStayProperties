@@ -53,3 +53,5 @@ def my_bookings(request):
     active_bookings = Lease.objects.filter(tenant=request.user, end_date__gte=date.today())
     old_bookings = Lease.objects.filter(tenant=request.user, end_date__lt=date.today())
     return render(request, 'leases/my_bookings.html', {'active_bookings': active_bookings, 'old_bookings': old_bookings})
+
+#test

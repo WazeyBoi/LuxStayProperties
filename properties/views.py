@@ -48,3 +48,5 @@ def delete_property(request, property_id):
         property.delete()
         return redirect('property_listing_management')
     return render(request, 'properties/delete_confirmation.html', {'property': property})
+
+#test
