@@ -4,54 +4,145 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tenant Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            width: 600px;
+        }
+        h2, h4 {
+            color: #800000;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .back-link {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .back-link a {
+            color: #800000;
+            font-weight: bold;
+            text-decoration: underline;
+            font-size: 14px;
+        }
+        form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .tenant-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            margin-bottom: 10px;
+        }
+        .lease-list {
+            list-style: none;
+            padding: 0;
+        }
+        .lease-item {
+            padding: 5px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .lease-item:last-child {
+            border-bottom: none;
+        }
+        .no-result {
+            color: #555;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
-<body style="font-family: Arial, sans-serif; background-color: #f4f6f9; display: flex; justify-content: center; padding: 20px;">
+<body>
 
-    <div style="background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); width: 600px;">
-
-        <div style="text-align: left; margin-bottom: 20px;">
-            <a href="{% url 'property_owner_dashboard' %}" style="color: #800000; font-weight: bold; text-decoration: underline; font-size: 14px;">&larr; Home</a>
+    <div class="container">
+        <div class="back-link">
+            <a href="{% url 'property_owner_dashboard' %}">&larr; Back to Dashboard</a>
         </div>
 
-        <h2 style="text-align: center; color: #800000; margin-bottom: 20px;">Tenant Management</h2>
-        
-        <form method="get" action="{% url 'tenant_management' %}" style="display: flex; gap: 10px; margin-bottom: 20px;">
-            <input type="text" name="search" placeholder="Search by first or last name" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;">
-            <button type="submit" style="padding: 10px 20px; background-color: #800000; color: white; border: none; border-radius: 5px; font-weight: bold; font-size: 14px; cursor: pointer;">Search</button>
+        <h2>Tenant Management</h2>
+
+        <form method="get" action="{% url 'tenant_management' %}">
+            <input type="text" name="search" placeholder="Search by first or last name">
+            <button type="submit">Search</button>
         </form>
 
-        <h3 style="margin-top: 20px; font-size: 18px; color: #333;">Search Results:</h3>
-        
         {% if tenants %}
             {% for tenant in tenants %}
-                <div style="border: 1px solid #ddd; border-radius: 5px; padding: 15px; background-color: #f9f9f9; margin-bottom: 10px;">
-                    <p style="font-weight: bold; margin: 0;">{{ tenant.first_name }} {{ tenant.last_name }}</p>
-                    <p><strong>Birthday:</strong> {{ tenant.birthdate|default:"N/A" }}</p>
-                    <p><strong>Email:</strong> {{ tenant.email|default:"N/A" }}</p>
-                    <p><strong>Contact:</strong> {{ tenant.contact|default:"N/A" }}</p>
+                <div class="tenant-card">
+                    <p><strong>Name:</strong> {{ tenant.first_name }} {{ tenant.last_name }}</p>
+                    <p><strong>Email:</strong> {{ tenant.email }}</p>
+                    <p><strong>Phone:</strong> {{ tenant.contact|default:"N/A" }}</p>
                     <p><strong>Address:</strong> {{ tenant.streetAddress|default:"N/A" }}, {{ tenant.city|default:"N/A" }}, {{ tenant.zipcode|default:"N/A" }}</p>
-                    <p><strong>Registration Date:</strong> {{ tenant.registrationDate|date:"Y-m-d" }}</p>
-                    
-                    <h4 style="margin-top: 10px; font-size: 16px; color: #333;">Rental History:</h4>
-                    {% if tenant.rental_history.exists %}
-                        <ul style="padding-left: 20px;">
-                            {% for lease in tenant.rental_history.all %}
-                                <li style="margin-bottom: 5px;">
-                                    <strong>Lease ID:</strong> {{ lease.leaseId }}<br>
-                                    <strong>Property ID:</strong> {{ lease.propertyId }}<br>
-                                    <strong>Start Date:</strong> {{ lease.startDate|date:"Y-m-d" }}<br>
-                                    <strong>End Date:</strong> {{ lease.endDate|date:"Y-m-d" }}
+
+                    <!-- Active Leases Section -->
+                    <h4>Active Leases:</h4>
+                    {% if tenant.active_leases %}
+                        <ul class="lease-list">
+                            {% for lease in tenant.active_leases %}
+                                <li class="lease-item">
+                                    <strong>Property:</strong> {{ lease.property.address }}<br>
+                                    <strong>Owner:</strong> {{ lease.property.owner.first_name }} {{ lease.property.owner.last_name }}<br>
+                                    <strong>Start:</strong> {{ lease.start_date }} |
+                                    <strong>End:</strong> {{ lease.end_date }}
                                 </li>
                             {% endfor %}
                         </ul>
                     {% else %}
-                        <p>No rental history available.</p>
+                        <p class="no-result">No active leases.</p>
+                    {% endif %}
+
+                    <!-- Inactive Leases Section -->
+                    <h4>Inactive Leases:</h4>
+                    {% if tenant.inactive_leases %}
+                        <ul class="lease-list">
+                            {% for lease in tenant.inactive_leases %}
+                                <li class="lease-item">
+                                    <strong>Property:</strong> {{ lease.property.address }}<br>
+                                    <strong>Owner:</strong> {{ lease.property.owner.first_name }} {{ lease.property.owner.last_name }}<br>
+                                    <strong>Start:</strong> {{ lease.start_date }} |
+                                    <strong>End:</strong> {{ lease.end_date }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="no-result">No inactive leases.</p>
                     {% endif %}
                 </div>
             {% endfor %}
         {% else %}
-            <p>No results found. Try searching with a different name.</p>
+            <p class="no-result">No results found. Try searching with a different name.</p>
         {% endif %}
     </div>
+
 </body>
 </html>

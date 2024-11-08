@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .models import User
 from leases.models import Lease
 from .forms import CustomUserCreationForm
+from datetime import date
 
 def register_view(request):
     if request.method == "POST":
@@ -46,19 +47,24 @@ def logout_view(request):
 
 @login_required
 def tenant_management(request):
-    tenants = []
-    search_query = request.GET.get("search", "").strip()  # Get the search term from query parameters
+    tenants = None
+    search_query = request.GET.get("search", "").strip()
 
     if search_query:
-        # Filter only tenants by first name or last name, case-insensitively
+        # Filter tenants by first name or last name
         tenants = User.objects.filter(
-            role='tenant',  # Ensures we retrieve only tenants
+            role='tenant'
         ).filter(
             first_name__icontains=search_query
         ) | User.objects.filter(
             role='tenant',
             last_name__icontains=search_query
         )
+
+        # Add active and inactive leases for each tenant
+        for tenant in tenants:
+            tenant.active_leases = Lease.objects.filter(tenant=tenant, end_date__gte=date.today())
+            tenant.inactive_leases = Lease.objects.filter(tenant=tenant, end_date__lt=date.today())
 
     return render(request, 'users/tenant_management.html', {'tenants': tenants})
 

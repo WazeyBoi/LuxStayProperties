@@ -1,0 +1,130 @@
+/* General Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Body and Main Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+}
+
+/* Header */
+.header {
+    background-color: #800000;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header .logo {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+}
+
+.header nav a {
+    color: white;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+.header .login-btn, .header .signup-btn {
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.header .signup-btn {
+    background-color: gold;
+}
+
+.header .login-btn:hover, .header .signup-btn:hover {
+    opacity: 0.8;
+}
+
+/* Footer */
+.footer {
+    background-color: #800000;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Form Container */
+.form-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    width: 340px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+/* Form Elements */
+.form-container h2 {
+    color: #800000;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-container label {
+    font-weight: normal;
+    color: #333;
+    font-size: 14px;
+    text-align: left;
+}
+
+.form-container input[type="text"],
+.form-container input[type="password"],
+.form-container input[type="email"],
+.form-container input[type="date"],
+.form-container textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.form-container button {
+    padding: 12px;
+    background-color: #800000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.form-container button:hover {
+    background-color: #660000;
+}
+
+.form-container p {
+    color: #555;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.form-container a {
+    color: #800000;
+    text-decoration: none;
+    font-weight: bold;
+}
