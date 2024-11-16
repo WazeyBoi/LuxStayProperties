@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Bookings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            margin: auto;
+        }
+        h2 {
+            color: #800000;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #800000;
+            color: white;
+        }
+        button {
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #c9302c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Property Bookings</h2>
+        {% if active_leases %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Property Name</th>
+                    <th>Address</th>
+                    <th>Tenant</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for lease in active_leases %}
+                <tr>
+                    <td>{{ lease.property.property_name }}</td>
+                    <td>{{ lease.property.address }}</td>
+                    <td>{{ lease.tenant.username }}</td>
+                    <td>{{ lease.start_date }}</td>
+                    <td>{{ lease.end_date }}</td>
+                    <td>
+                        <a href="{% url 'terminate_confirmation' lease.id %}" style="text-decoration: none; color: white; background-color: #d9534f; padding: 5px 10px; border-radius: 5px; font-weight: bold;">Terminate</a>
+                    </td>                                       
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No active leases found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Properties</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f6f9; display: flex; justify-content: center; padding: 20px;">
+
+    <div style="background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); width: 95%;">
+
+        <div style="text-align: left; margin-bottom: 20px;">
+            <a href="{% url 'tenant_dashboard' %}" style="color: #800000; font-weight: bold; text-decoration: underline; font-size: 14px;">&larr; Back to Dashboard</a>
+        </div>
+
+        <h2 style="text-align: center; color: #800000; margin-bottom: 20px;">Available Properties</h2>
+
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+            <thead>
+                <tr style="background-color: #800000; color: white; text-align: left;">
+                    <th style="padding: 10px;">Name</th>
+                    <th style="padding: 10px;">Address</th>
+                    <th style="padding: 10px;">Type</th>
+                    <th style="padding: 10px;">Price per month (PHP)</th>
+                    <th style="padding: 10px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for property in properties %}
+                <tr style="border-bottom: 1px solid #ddd; text-align: left;">
+                    <td style="padding: 10px;">{{ property.property_name }}</td>
+                    <td style="padding: 10px;">{{ property.address }}</td>
+                    <td style="padding: 10px;">{{ property.property_type|capfirst }}</td>
+                    <td style="padding: 10px;">{{ property.price }}</td>
+                    <td style="padding: 10px;">
+                        <a href="{% url 'view_property_details' property.id %}" style="text-decoration: none; color: #800000; font-weight: bold;">VIEW MORE DETAILS</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8" style="padding: 20px; text-align: center; color: #666;">No properties available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

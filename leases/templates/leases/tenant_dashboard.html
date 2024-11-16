@@ -4,63 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tenant Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            margin: auto;
+            text-align: center;
+        }
+        .logout {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .logout a {
+            color: #800000;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        h2 {
+            color: #800000;
+            margin-bottom: 20px;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .button-container a {
+            text-decoration: none;
+            color: white;
+            background-color: #800000;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .button-container a:hover {
+            background-color: #660000;
+        }
+    </style>
 </head>
-<body style="font-family: Arial, sans-serif; background-color: #f4f6f9; display: flex; justify-content: center; padding: 20px;">
+<body>
 
-    <div style="background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); width: 700px;">
-        
-        <div style="text-align: left; margin-bottom: 20px;">
-            <a href="{% url 'logout' %}" style="color: #800000; font-weight: bold; text-decoration: underline; font-size: 14px;">Logout</a>
+    <div class="container">
+        <!-- Logout Link -->
+        <div class="logout">
+            <a href="{% url 'logout' %}">Logout</a>
         </div>
-        
-        <h2 style="text-align: center; color: #800000; margin-bottom: 20px;">Tenant Dashboard</h2>
 
-        <!-- Available Properties Section -->
-        <h3 style="color: #333; margin-bottom: 10px;">Available Properties</h3>
-        <ul style="list-style: none; padding: 0;">
-            {% for property in available_properties %}
-                <li style="padding: 15px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 10px;">
-                    <p><strong>Address:</strong> {{ property.address }}</p>
-                    <p><strong>Type:</strong> {{ property.property_type }}</p>
-                    <p><strong>Rooms:</strong> {{ property.number_of_rooms }}</p>
-                    <p><strong>Price:</strong> ${{ property.price }}</p>
-                    <p><strong>Status:</strong> {{ property.get_status_display }}</p>
-                    <p><strong>Description:</strong> {{ property.description|default:"No description provided." }}</p>
-                    <a href="{% url 'book_property' property.id %}" style="display: inline-block; margin-top: 10px; padding: 8px 15px; background-color: #800000; color: white; border-radius: 5px; text-decoration: none; font-weight: bold;">Book Property</a>
-                </li>
-            {% empty %}
-                <p>No available properties at the moment.</p>
-            {% endfor %}
-        </ul>
+        <!-- Header -->
+        <h2>Tenant Dashboard</h2>
 
-        <!-- My Bookings Section -->
-        <h3 style="color: #333; margin-top: 30px; margin-bottom: 10px;">My Bookings</h3>
-
-        <h4 style="color: #666; margin-top: 20px;">Active Bookings</h4>
-        <ul style="list-style: none; padding: 0;">
-            {% for booking in active_bookings %}
-                <li style="padding: 10px; background-color: #e7f3e7; border: 1px solid #c2e0c2; border-radius: 5px; margin-bottom: 10px;">
-                    <p><strong>Property:</strong> {{ booking.property.address }}</p>
-                    <p><strong>Start Date:</strong> {{ booking.start_date }}</p>
-                    <p><strong>End Date:</strong> {{ booking.end_date }}</p>
-                </li>
-            {% empty %}
-                <p>No active bookings.</p>
-            {% endfor %}
-        </ul>
-
-        <h4 style="color: #666; margin-top: 20px;">Old Bookings</h4>
-        <ul style="list-style: none; padding: 0;">
-            {% for booking in old_bookings %}
-                <li style="padding: 10px; background-color: #f9e7e7; border: 1px solid #e0c2c2; border-radius: 5px; margin-bottom: 10px;">
-                    <p><strong>Property:</strong> {{ booking.property.address }}</p>
-                    <p><strong>Start Date:</strong> {{ booking.start_date }}</p>
-                    <p><strong>End Date:</strong> {{ booking.end_date }}</p>
-                </li>
-            {% empty %}
-                <p>No old bookings.</p>
-            {% endfor %}
-        </ul>
+        <!-- Navigation Buttons -->
+        <div class="button-container">
+            <a href="{% url 'property_listing' %}" class="dashboard-btn">Property Listings</a>
+            <a href="{% url 'my_bookings' %}">My Bookings</a>
+            <a href="">My Payments</a>
+            <a href="">My Maintenance Request</a>
+            <a href="">My Feedbacks</a>
+            <a href="{% url 'edit_account' %}">My Account</a>
+        </div>
     </div>
 
 </body>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            width: 500px;
+        }
+        h2 {
+            color: #800000;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #800000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #a32c2c;
+        }
+        .back-link {
+            text-align: left;
+            margin-top: 10px;
+        }
+        .back-link a {
+            color: #800000;
+            font-weight: bold;
+            text-decoration: underline;
+            font-size: 14px;
+        }
+    </style>
+    <script>
+        function confirmUpdate() {
+            return confirm("Are you sure you want to update your details?");
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="{% url 'tenant_dashboard' %}">&larr; Back to Dashboard</a>
+        </div>
+        <h2>Edit Account</h2>
+
+        <form method="POST" onsubmit="return confirmUpdate();">
+            {% csrf_token %}
+            
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" value="{{ user.username }}" required>
+
+            <label for="password">New Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter new password (leave blank to keep current password)">
+
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your new password">
+
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}" required>
+
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{ user.email }}" required>
+
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" value="{{ user.contact|default_if_none:'' }}" placeholder="Enter phone number">
+
+            <label for="birthdate">Birthdate:</label>
+            <input type="date" id="birthdate" name="birthdate" value="{{ user.birthdate|date:'Y-m-d' }}" required>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" value="{{ user.address|default_if_none:'' }}" placeholder="Enter your address">
+
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" value="{{ user.city|default_if_none:'' }}" placeholder="Enter your city">
+
+            <label for="zip_code">Zip Code:</label>
+            <input type="text" id="zip_code" name="zip_code" value="{{ user.zip_code|default_if_none:'' }}" placeholder="Enter your zip code">
+
+            <button type="submit">Update Details</button>
+        </form>
+    </div>
+</body>
+</html>

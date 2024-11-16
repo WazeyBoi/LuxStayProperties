@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Bookings</title>
+    <title>Lease Details</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -60,7 +60,7 @@
             color: #d9534f;
             font-weight: bold;
         }
-        .no-bookings {
+        .no-leases {
             text-align: center;
             color: #666;
             margin-top: 20px;
@@ -81,30 +81,16 @@
 <body>
 
     <div class="container">
+        <!-- Back Link -->
         <div class="back-link">
-            <a href="{% url 'tenant_dashboard' %}">&larr; Back to Dashboard</a>
+            <a href="{% url 'tenant_management' %}">&larr; Back to Tenant Management</a>
         </div>
 
-        <h2>My Bookings</h2>
+        <h2>Lease Details for {{ tenant.first_name }} {{ tenant.last_name }}</h2>
 
-       <!-- Active Bookings -->
-        {% if active_bookings %}
-            {% for booking in active_bookings %}
-                <tr>
-                    <td>{{ booking.property.property_name }}</td>
-                    <td>{{ booking.property.address }}</td>
-                    <td>{{ booking.start_date }}</td>
-                    <td>{{ booking.end_date }}</td>
-                    <td class="status-active">Active</td>
-                </tr>
-            {% endfor %}
-         {% else %}
-            <p class="no-bookings">No active bookings.</p>
-        {% endif %}
-
-        <!-- Old Bookings -->
-        <h3 style="color: #333; margin-top: 40px;">Old Bookings</h3>
-        {% if old_bookings %}
+        <!-- Active Leases -->
+        <h3 style="color: #333; margin-top: 20px;">Active Leases</h3>
+        {% if active_leases %}
         <table>
             <thead>
                 <tr>
@@ -116,19 +102,48 @@
                 </tr>
             </thead>
             <tbody>
-                {% for booking in old_bookings %}
+                {% for lease in active_leases %}
                 <tr>
-                    <td>{{ booking.property.property_name }}</td>
-                    <td>{{ booking.property.address }}</td>
-                    <td>{{ booking.start_date }}</td>
-                    <td>{{ booking.end_date }}</td>
+                    <td>{{ lease.property.property_name }}</td>
+                    <td>{{ lease.property.address }}</td>
+                    <td>{{ lease.start_date }}</td>
+                    <td>{{ lease.end_date }}</td>
+                    <td class="status-active">Active</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="no-leases">No active leases found.</p>
+        {% endif %}
+
+        <!-- Inactive Leases -->
+        <h3 style="color: #333; margin-top: 40px;">Inactive Leases</h3>
+        {% if inactive_leases %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Property Name</th>
+                    <th>Address</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for lease in inactive_leases %}
+                <tr>
+                    <td>{{ lease.property.property_name }}</td>
+                    <td>{{ lease.property.address }}</td>
+                    <td>{{ lease.start_date }}</td>
+                    <td>{{ lease.end_date }}</td>
                     <td class="status-old">Ended</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
         {% else %}
-        <p class="no-bookings">No old bookings.</p>
+        <p class="no-leases">No inactive leases found.</p>
         {% endif %}
     </div>
 

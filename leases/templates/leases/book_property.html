@@ -4,20 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Property</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        h2 {
+            text-align: center;
+            color: #800000;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+            color: #333;
+            font-size: 14px;
+        }
+        input[type="date"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .amount {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 15px;
+            text-align: center;
+        }
+        .amount span {
+            color: #800000;
+        }
+        button {
+            background-color: #800000;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+        button:hover {
+            background-color: #a00000;
+        }
+    </style>
 </head>
-<body style="font-family: Arial, sans-serif; background-color: #f4f6f9; display: flex; justify-content: center; padding: 20px;">
+<body>
 
-    <div style="background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); width: 400px;">
-        <h2 style="text-align: center; color: #800000;">Book Property</h2>
+    <div class="container">
+        <h2>Book Property</h2>
         <form method="post">
             {% csrf_token %}
             <label for="start_date">Start Date:</label>
-            <input type="date" name="start_date" required>
+            <input type="date" id="start_date" name="start_date" required>
             
             <label for="end_date">End Date:</label>
-            <input type="date" name="end_date" required>
+            <input type="date" id="end_date" name="end_date" required>
             
-            <button type="submit" style="margin-top: 10px;">Book Property</button>
+            <div class="amount">
+                Initial Amount to Pay: <span>PHP {{ property.price }}</span>
+            </div>
+            
+            <button type="submit">Book Property</button>
         </form>
     </div>
 

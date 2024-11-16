@@ -8,12 +8,15 @@
 </head>
 <body style="font-family: Arial, sans-serif; background-color: #f4f6f9; color: #333; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0;">
 
-    <div style="background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); width: 340px; margin: 20px;">
+    <div style="background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); width: 400px; margin: 20px;">
         <h2 style="text-align: center; color: #800000; margin-bottom: 20px; font-size: 24px; font-weight: bold;">Add Property</h2>
         
         <form method="post" style="display: flex; flex-direction: column; gap: 10px;">
             {% csrf_token %}
             {{ form.non_field_errors }}
+
+            <label for="property_name" style="font-weight: normal; color: #333; font-size: 14px;">Property Name:</label>
+            {{ form.property_name }}
 
             <label for="address" style="font-weight: normal; color: #333; font-size: 14px;">Address:</label>
             {{ form.address }}
@@ -24,8 +27,26 @@
             <label for="number_of_rooms" style="font-weight: normal; color: #333; font-size: 14px;">Number of Rooms:</label>
             {{ form.number_of_rooms }}
 
+            <label for="num_of_bathrooms" style="font-weight: normal; color: #333; font-size: 14px;">Number of Bathrooms:</label>
+            {{ form.num_of_bathrooms }}
+
+            <label for="sqft" style="font-weight: normal; color: #333; font-size: 14px;">Square Feet:</label>
+            {{ form.sqft }}
+
             <label for="price" style="font-weight: normal; color: #333; font-size: 14px;">Price:</label>
             {{ form.price }}
+
+            <label for="is_furnished" style="font-weight: normal; color: #333; font-size: 14px;">Furnished:</label>
+            {{ form.is_furnished }}
+
+            <label for="parking_spaces" style="font-weight: normal; color: #333; font-size: 14px;">Parking Spaces:</label>
+            {{ form.parking_spaces }}
+
+            <label for="pet_policy" style="font-weight: normal; color: #333; font-size: 14px;">Pet Policy:</label>
+            <select name="pet_policy" id="pet_policy" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;">
+                <option value="True" {% if form.pet_policy.value == "True" %}selected{% endif %}>Yes</option>
+                <option value="False" {% if form.pet_policy.value == "False" %}selected{% endif %}>No</option>
+            </select>
 
             <label for="status" style="font-weight: normal; color: #333; font-size: 14px;">Status:</label>
             {{ form.status }}

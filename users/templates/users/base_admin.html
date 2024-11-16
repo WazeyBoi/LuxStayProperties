@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin Page{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'admin/style.css' %}">
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f6f9; color: #333; margin: 0;">
+
+    <!-- Header -->
+    <header class="header" style="background-color: #800000; padding: 15px;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="logo" style="display: flex; align-items: center;">
+                <span style="color: white; font-size: 24px; font-weight: bold;">LuxStay Admin Panel</span>
+            </div>
+            <nav>
+                <a href="{% url 'admin_dashboard' %}" style="color: white; margin-right: 15px; text-decoration: none; font-weight: bold;">Dashboard</a>
+                <a href="{% url 'admin_manage_users' %}" style="color: white; margin-right: 15px; text-decoration: none; font-weight: bold;">Manage Users</a>
+                <a href="{% url 'admin_manage_properties' %}" style="color: white; text-decoration: none; font-weight: bold;">Manage Properties</a>
+                <a href="{% url 'logout' %}" style="color: white; text-decoration: none; font-weight: bold; margin-left: 15px;">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main style="padding: 20px;">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer style="background-color: #800000; color: white; text-align: center; padding: 15px; font-size: 14px;">
+        &copy; EST. 2024 | LuxStay Admin | All Rights Reserved
+    </footer>
+
+</body>
+</html>

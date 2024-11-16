@@ -3,6 +3,10 @@ from django.contrib.auth.decorators import login_required
 from users.models import User
 from .models import Property
 from .forms import PropertyForm
+from django.core.paginator import Paginator
+from leases.models import Lease
+from datetime import date
+from django.contrib import messages
 
 @login_required
 def property_owner_dashboard(request):
@@ -14,7 +18,11 @@ def property_owner_dashboard(request):
 def property_listing_management(request):
     # Display only properties owned by the logged-in user
     properties = Property.objects.filter(owner=request.user)
-    return render(request, 'properties/property_listing_management.html', {'properties': properties})
+    paginator = Paginator(properties, 5)  # Show 5 properties per page
+    page_number = request.GET.get('page')  # Get the current page number from the request
+    page_obj = paginator.get_page(page_number)  # Get the properties for the current page
+
+    return render(request, 'properties/property_listing_management.html', {'page_obj': page_obj})
 
 @login_required
 def add_property(request):
@@ -48,3 +56,39 @@ def delete_property(request, property_id):
         property.delete()
         return redirect('property_listing_management')
     return render(request, 'properties/delete_confirmation.html', {'property': property})
+
+@login_required
+def property_bookings(request):
+    # Fetch all properties with active leases
+    active_leases = Lease.objects.filter(status='active', end_date__gte=date.today())
+    
+    context = {
+        'active_leases': active_leases,
+    }
+    return render(request, 'leases/property_bookings.html', context)
+
+@login_required
+def terminate_lease(request, lease_id):
+    lease = get_object_or_404(Lease, id=lease_id)
+
+    if request.method == 'POST':
+        # Update the property's status to available
+        lease.property.status = 'available'
+        lease.property.save()
+
+        # Mark the lease as inactive
+        lease.end_date = date.today()  # Set the end date to today
+        lease.status = 'inactive'  # Ensure lease status is inactive
+        lease.save()
+
+        messages.success(request, "Lease terminated successfully.")
+        return redirect('property_bookings')
+
+    return render(request, 'leases/terminate_confirmation.html', {'lease': lease})
+    
+@login_required
+def terminate_confirmation(request, lease_id):
+    lease = get_object_or_404(Lease, id=lease_id)
+    return render(request, 'leases/terminate_confirmation.html', {'lease': lease})
+
+#test
