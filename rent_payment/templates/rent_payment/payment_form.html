@@ -1,0 +1,38 @@
+{% extends "users/base.html" %}
+{% load static %}
+
+{% block title %}Payment Form{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 800px; margin: 20px auto; background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <h1 style="color: #800000; text-align: center;">Payment</h1>
+    
+    <form method="post" style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="background-color: #800000; color: white; border: none; font-size: 20px; cursor: pointer; border-radius: 8px; transition: background-color 0.3s; grid-column: span 2; padding: 15px 30px; width: 100%;">PAY</button>
+    </form>
+    
+    <a href="{% url 'payment_list' %}" class="cancel-link" style="display: block; text-align: center; margin-top: 20px; color: #800000; text-decoration: none; font-weight: bold;">
+        Cancel
+    </a>
+</div>
+
+{% block extra_css %}
+<style>
+    input, select, textarea {
+        width: 100%; /* Ensures the inputs span the full width */
+        padding: 10px; /* Adds some padding inside the input fields */
+        border-radius: 5px; /* Optional: rounds the corners of the input fields */
+        border: 1px solid #ccc; /* Adds a light border around the fields */
+    }
+
+    button {
+        font-size: 20px; /* Makes the font bigger */
+        padding: 15px 30px; /* Increases the padding to make the button larger */
+        width: 100%; /* Ensures the button takes up the full width */
+    }
+</style>
+{% endblock %}
+
+{% endblock %}

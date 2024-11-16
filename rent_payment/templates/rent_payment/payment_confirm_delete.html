@@ -1,0 +1,17 @@
+{% extends "users/base.html" %}
+
+{% block title %}Delete Payment | LuxStay Properties{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Delete Payment</h2>
+    <p>Are you sure you want to delete {{ payment }}?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirm</button>
+    </form>
+    <p>
+        <a href="{% url 'payment_list' %}">Cancel</a>
+    </p>
+</div>
+{% endblock %}

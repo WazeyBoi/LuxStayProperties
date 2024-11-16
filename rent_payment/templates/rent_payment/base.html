@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Page{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'users/style.css' %}">
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f6f9; color: #333; margin: 0;">
+
+    <!-- Header -->
+    <header class="header" style="background-color: #800000; padding: 10px;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="logo" style="display: flex; align-items: center;">
+                <span style="color: white; font-size: 20px; font-weight: bold;">LuxStay Properties</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main style="padding: 20px;">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer style="background-color: #800000; color: white; text-align: center; padding: 10px; font-size: 14px; position: fixed; width: 100%; bottom: 0;">
+        &copy; EST. 2024 | All Rights Reserved
+    </footer>
+
+</body>
+</html>

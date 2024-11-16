@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'users',
     'properties',
     'leases',
+    'rent_payment',
+    'lease_management',
 ]
 
 AUTH_USER_MODEL = 'users.User'
