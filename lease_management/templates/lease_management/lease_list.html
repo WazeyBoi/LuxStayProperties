@@ -1,119 +1,35 @@
+{% extends "users/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lease Management</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f8f8;
-        }
-        .header, .footer {
-            background-color: #71131d;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-        }
-        .header img {
-            height: 40px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            color: #71131d;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .add-link {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #71131d;
-            color: white;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .add-link:hover {
-            background-color: #5c0e17;
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        li {
-            padding: 15px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        li p {
-            margin-bottom: 10px;
-        }
-        .lease-actions a {
-            display: inline-block;
-            padding: 8px 15px;
-            background-color: #01a63d;
-            color: white;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-        .lease-actions a.delete {
-            background-color: #d9534f;
-        }
-        .lease-actions a:hover {
-            background-color: #013d21;
-        }
-        .lease-actions a.delete:hover {
-            background-color: #c9302c;
-        }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <p>LuxStay Properties</p>
-    </div>
 
-    <div class="container">
-        <h1>Leases</h1>
-        <a href="{% url 'lease_create' %}" class="add-link">Add Lease</a>
-        <h3 style="color: #333; margin-bottom: 10px;">Lease Details</h3>
-        <ul>
-            {% for lease in leases %}
-                <li>
-                    <p><strong>Lease ID:</strong> {{ lease.leaseId }}</p>
-                    <p><strong>Property ID:</strong> {{ lease.propertyId }}</p>
-                    <p><strong>Tenant ID:</strong> {{ lease.tenantId }}</p>
-                    <p><strong>Start Date:</strong> {{ lease.startDate }}</p>
-                    <p><strong>End Date:</strong> {{ lease.endDate }}</p>
-                    <p><strong>Total Amount:</strong> ${{ lease.totalAmount }}</p>
-                    <div class="lease-actions">
-                        <a href="{% url 'lease_update' lease.leaseId %}">Edit</a>
-                        <a href="{% url 'lease_delete' lease.leaseId %}" class="delete">Delete</a>
-                    </div>
-                </li>
-            {% empty %}
-                <p>No leases found.</p>
-            {% endfor %}
-        </ul>
-    </div>
+{% block title %}Leases{% endblock %}
 
-    <div class="footer">
-        <p>LuxStay Properties</p>
-    </div>
-</body>
-</html>
+{% block content %}
+<div class="container" style="background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); width: 600px; margin: auto;">
+
+    <h2 style="text-align: center; color: #71131d; margin-bottom: 20px;">Leases</h2>
+    
+    <a href="{% url 'lease_create' %}" class="add-lease" style="display: inline-block; margin-bottom: 20px; padding: 10px 20px; background-color: #71131d; color: white; border-radius: 5px; text-decoration: none; font-weight: bold; text-align: center;">Add Lease</a>
+
+    <!-- Leases List -->
+    <h3 style="color: #333; margin-bottom: 10px;">Lease Details</h3>
+    <ul style="list-style: none; padding: 0;">
+        {% for lease in leases %}
+            <li style="padding: 15px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 20px;">
+                <p style="margin-bottom: 10px;"><strong>Lease ID:</strong> {{ lease.leaseId }}</p>
+                <p style="margin-bottom: 10px;"><strong>Property ID:</strong> {{ lease.propertyId }}</p>
+                <p style="margin-bottom: 10px;"><strong>Tenant ID:</strong> {{ lease.tenantId }}</p>
+                <p style="margin-bottom: 10px;"><strong>Start Date:</strong> {{ lease.startDate }}</p>
+                <p style="margin-bottom: 10px;"><strong>End Date:</strong> {{ lease.endDate }}</p>
+                <p style="margin-bottom: 10px;"><strong>Total Amount:</strong> ${{ lease.totalAmount }}</p>
+                <div class="lease-actions" style="margin-top: 15px;">
+                    <a href="{% url 'lease_update' lease.leaseId %}" style="display: inline-block; padding: 8px 15px; background-color: #01a63d; color: white; border-radius: 5px; text-decoration: none; font-weight: bold; margin-right: 10px;">Edit</a>
+                    <a href="{% url 'lease_delete' lease.leaseId %}" style="display: inline-block; padding: 8px 15px; background-color: #d9534f; color: white; border-radius: 5px; text-decoration: none; font-weight: bold;">Delete</a>
+                </div>
+            </li>
+        {% empty %}
+            <p>No leases found.</p>
+        {% endfor %}
+    </ul>
+
+</div>
+{% endblock %}

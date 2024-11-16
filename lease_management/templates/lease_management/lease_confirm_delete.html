@@ -1,25 +1,24 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Delete Payment</title>
+{% extends "users/base.html" %}
+
+{% block title %}Delete Payment | LuxStay Properties{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <h2>Delete Lease</h2>
+        <p>Are you sure you want to delete {{ payment }}?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Confirm</button>
+        </form>
+        <p>
+            <a href="{% url 'lease_list' %}">Cancel</a>
+        </p>
+    </div>
+{% endblock %}
+
+{% block extra_styles %}
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f8f8;
-        }
-        .header, .footer {
-            background-color: #71131d;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-        }
-        .header img {
-            height: 40px;
-        }
-        .container {
+        .form-container {
             max-width: 600px;
             margin: 20px auto;
             background-color: white;
@@ -28,7 +27,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-        h1 {
+        h2 {
             color: #71131d;
             margin-bottom: 20px;
         }
@@ -48,35 +47,13 @@
         button:hover {
             background-color: #5b0f17;
         }
-        .cancel-link {
-            display: inline-block;
-            margin-top: 15px;
+        a {
             color: #71131d;
             text-decoration: none;
             font-weight: bold;
         }
-        .cancel-link:hover {
+        a:hover {
             text-decoration: underline;
         }
     </style>
-</head>
-<body>
-    <div class="header">
-        <p>LuxStay Properties</p>
-    </div>
-
-    <div class="container">
-        <h1>Delete Payment</h1>
-        <p>Are you sure you want to delete {{ payment }}?</p>
-        <form method="post">
-            {% csrf_token %}
-            <button type="submit">Confirm</button>
-        </form>
-        <a href="{% url 'payment_list' %}" class="cancel-link">Cancel</a>
-    </div>
-
-    <div class="footer">
-        <p>LuxStay Properties</p>
-    </div>
-</body>
-</html>
+{% endblock %}
